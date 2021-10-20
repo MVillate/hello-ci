@@ -37,20 +37,26 @@ jobs:
   saving-output:
     docker:
       - image: circleci/node:13.8.0
-
     steps:
       - checkout
-      # - persist_to_workspace:
-      #     root: /tmp/dir
-      #     paths:
-      #       - foo/bar
-      #       - baz
+      - persist_to_workspace:
+          root: /tmp/dir
+          paths:
+            - /home/circleci/project
       - run: echo "text to output here" > output.txt
       - run: pwd
       - run: ls
       - run: mkdir mv
       - run: cd mv
       - run: echo "text to output here" > output2.txt
+      - run: ls
+
+  saving-output:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run: ls
 
 
@@ -75,5 +81,6 @@ workflows:
       - say-hello
       - play-with-envvars
       - saving-output
+      - printing-output
       - say-goodbye:
           requires: [say-hello, play-with-envvars]
