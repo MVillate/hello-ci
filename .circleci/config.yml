@@ -40,9 +40,9 @@ jobs:
     steps:
       - checkout
       - persist_to_workspace:
-          root: /tmp/dir
+          root: /home/circleci/
           paths:
-            - /home/circleci/project
+            - project
       - run: echo "text to output here" > output.txt
       - run: pwd
       - run: ls
@@ -56,7 +56,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /home/circleci
       - run: ls
 
 
