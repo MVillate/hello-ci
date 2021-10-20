@@ -27,8 +27,8 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - run: "My pipeline id is << pipeline.id >> and my git branch is << pipeline.git.branch >>."
-
+      - run: "echo My pipeline id is << pipeline.id >> and my git branch is << pipeline.git.branch >>."
+      - run: "echo My git granch is << CIRCLE_BRANCH >> and the build is << CIRCLE_BUILD_NUM >>"
 
   say-goodbye:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
