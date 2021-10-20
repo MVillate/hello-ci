@@ -79,10 +79,21 @@ jobs:
       - run: mkdir newdir
       - run: ls
       - run:
-          name: Testing application
+          name: Saying goodbye
           command: echo "bye!!"
           shell: /bin/bash
           working_directory: ~/newdir
+
+
+  error:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: exit 1
+      - run:
+          name: on error
+          command: echo "Hello Error!"
+          when: on_fail
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -96,3 +107,4 @@ workflows:
           requires: [say-hello, saving-output, play-with-envvars]
       - say-goodbye:
           requires: [printing-output]
+      - error
