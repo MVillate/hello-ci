@@ -2,6 +2,16 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+# Anchors and aliases
+defaults: &defaults
+  docker: 
+    - image: circleci/node:13.8.0
+
+commands:
+  print_pipeline_id:
+    steps:
+      - run: echo $CIRCLE_WORKFLOW_ID
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -21,8 +31,8 @@ jobs:
   play-with-envvars:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: circleci/node:13.8.0
+    # Using the alias defaults
+    <<: *defaults
     environment:
       ENV_VAR_CONFIG1: "this is an env variable"
     # Add steps to the job
@@ -33,7 +43,7 @@ jobs:
       - run: echo "My git granch is $CIRCLE_BRANCH and the build is $CIRCLE_BUILD_NUM"
       - run: echo $ENV_VAR_CONFIG1
       - run: echo $ENV_VAR_UI1
-
+      - print_pipeline_id
   saving-output:
     docker:
       - image: circleci/node:13.8.0
