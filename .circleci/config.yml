@@ -81,6 +81,7 @@ workflows:
       - say-hello
       - play-with-envvars
       - saving-output
-      - printing-output
+      - printing-output:
+          requires: [say-hello, saving-output, play-with-envvars]
       - say-goodbye:
-          requires: [say-hello, play-with-envvars]
+          requires: [printing-output]
