@@ -23,12 +23,15 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: circleci/node:13.8.0
+    environment:
+      ENV_VAR_1: "this is an env variable"
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
       - run: echo "My pipeline id is << pipeline.id >> and my git branch is << pipeline.git.branch >>."
       - run: echo "My git granch is $CIRCLE_BRANCH and the build is $CIRCLE_BUILD_NUM"
+      - run: echo $ENV_VAR_1
 
   say-goodbye:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
