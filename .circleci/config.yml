@@ -74,5 +74,6 @@ workflows:
     jobs:
       - say-hello
       - play-with-envvars
+      - saving-output
       - say-goodbye:
           requires: [say-hello, play-with-envvars]
