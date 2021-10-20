@@ -43,14 +43,14 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - output.txt
+            - project
 
   printing-output:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: ~/
+          at: ~/project
       - run: ls
       - run: more output.txt
 
