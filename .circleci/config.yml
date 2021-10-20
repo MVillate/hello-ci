@@ -41,16 +41,16 @@ jobs:
       - checkout
       - run: echo "text to output here" > output.txt
       - persist_to_workspace:
-          root: /home/circleci/
+          root: ~/
           paths:
-            - project
+            - output.txt
 
   printing-output:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: /home/circleci
+          at: ~/
       - run: ls
       - run: more output.txt
 
